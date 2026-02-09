@@ -357,7 +357,14 @@ client.on('messageCreate', async (message) => {
 
 
             stats.total = count;
-            message.channel.send(`**Starting Mass Promo DM**\nTarget: ${count} Members`);
+            stats.total = count;
+            message.channel.send(`**Starting Mass Promo DM**\nTarget: ${count} Members\n*Sending preview below...*`);
+
+            // Send Preview
+            await message.channel.send({ content: '👀 **Preview of Promo Message:**', embeds: [promoEmbed], components: [row] });
+
+            // Reset dashboard to force new status embed
+            dashboardMessage = null;
             processQueue(message.channel);
 
         } catch (error) {
