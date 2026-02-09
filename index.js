@@ -376,7 +376,13 @@ client.on('messageCreate', async (message) => {
     }
 });
 
-client.login(process.env.DISCORD_TOKEN);
+const token = process.env.DISCORD_TOKEN;
+if (!token) {
+    console.error("CRITICAL ERROR: DISCORD_TOKEN is missing! Please set it in Railway Variables.");
+    process.exit(1);
+}
+
+client.login(token);
 
 // --- Railway / Keep-Alive Server ---
 const http = require('http');
